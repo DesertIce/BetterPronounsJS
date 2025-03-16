@@ -5,13 +5,13 @@
 </head>
 <body>
     <script async>
-        GetPronoun("desertice").then(console.info).then
-            GetPronounPadStart("desertice").then(p => console.info(`padStart: [${p}]`)).then
-                GetPronounPadEnd("desertice").then(p => console.info(`padEnd: [${p}]`)); 
+        GetPronouns("desertice").then(console.info).then
+            GetPronounsPadStart("desertice").then(p => console.info(`padStart: [${p}]`)).then
+                GetPronounsPadEnd("desertice").then(p => console.info(`padEnd: [${p}]`)); 
 
-        GetPronoun("INVALID_USER").then(p => console.info(`Invalid user: [${p}]`)).then
-            GetPronounPadStart("INVALID_USER").then(p => console.info(`IU padStart: [${p}]`)).then
-                GetPronounPadEnd("INVALID_USER").then(p => console.info(`IU padEnd: [${p}]`));
+        GetPronouns("INVALID_USER").then(p => console.info(`Invalid user: [${p}]`)).then
+            GetPronounsPadStart("INVALID_USER").then(p => console.info(`IU padStart: [${p}]`)).then
+                GetPronounsPadEnd("INVALID_USER").then(p => console.info(`IU padEnd: [${p}]`));
             
     </script>
 </body>

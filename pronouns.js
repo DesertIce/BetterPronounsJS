@@ -14,11 +14,15 @@ const PronounIdMap = {
     "ziehir": "Zie",
 } ;
 
-async function GetPronoun(sbClient, user) {
-    if(sbClient === undefined || sbClient === null) 
-        sbClient = new StreamerBotClient();
+const testSbClient = new StreamerbotClient();
+
+async function GetPronouns(user) {
+    return await GetPronouns(testSbClient, user);
+}
+
+async function GetPronouns(user, sbClient) {
     
-    const alejoPronouns = await _getPronounJson(user);
+    const alejoPronouns = await _getPronounsJson(user);
     if(alejoPronouns === undefined || alejoPronouns === "") { return ""; }
     if(alejoPronouns.alt_pronoun_id === null){
         const sbPronouns = await sbClient.getUserPronouns('twitch', user);
@@ -28,19 +32,19 @@ async function GetPronoun(sbClient, user) {
     }
 }
 
-async function GetPronounPadStart(user) {
-    const pronoun = await GetPronoun(user);
+async function GetPronounsPadStart(user) {
+    const pronoun = await GetPronouns(user);
     if(pronoun === "") { return ""; }
     return ` ${pronoun}`;
 }
 
-async function GetPronounPadEnd(user,) {
-    const pronoun = await GetPronoun(user);
+async function GetPronounsPadEnd(user,) {
+    const pronoun = await GetPronouns(user);
     if(pronoun === "") { return ""; }
     return `${pronoun} `;
 }
 
-async function _getPronounJson(userId) {
+async function _getPronounsJson(userId) {
     const json = await fetch(`https://api.pronouns.alejo.io/v1/users/${userId}`, {cache: "default"})
         .then(res => 
         {
