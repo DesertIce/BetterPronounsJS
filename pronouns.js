@@ -14,13 +14,14 @@ const PronounIdMap = {
     "ziehir": "Zie",
 } ;
 
-const client = new StreamerbotClient();
-
-async function GetPronoun(user) {
+async function GetPronoun(sbClient, user) {
+    if(sbClient === undefined || sbClient === null) 
+        sbClient = new StreamerBotClient();
+    
     const alejoPronouns = await _getPronounJson(user);
     if(alejoPronouns === undefined || alejoPronouns === "") { return ""; }
     if(alejoPronouns.alt_pronoun_id === null){
-        const sbPronouns = await client.getUserPronouns('twitch', user);
+        const sbPronouns = await sbClient.getUserPronouns('twitch', user);
         return sbPronouns.pronoun.pronouns;
     } else {
         return `(${PronounIdMap[alejoPronouns.pronoun_id]}/${PronounIdMap[alejoPronouns.alt_pronoun_id]})`;
