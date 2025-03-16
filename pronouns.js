@@ -17,7 +17,6 @@ const PronounIdMap = Object.freeze({
 BetterPronounsJS.PronounIdMap = PronounIdMap
 
 async function GetPronouns(user, sbClient) {
-    
     const alejoPronouns = await _getPronounsJson(user);
     if(alejoPronouns === undefined || alejoPronouns === "") { return ""; }
     if(alejoPronouns.alt_pronoun_id === null){
@@ -29,16 +28,16 @@ async function GetPronouns(user, sbClient) {
 }
 BetterPronounsJS.GetPronouns = GetPronouns;
 
-async function GetPronounsPadStart(user) {
-    const pronoun = await GetPronouns(user);
+async function GetPronounsPadStart(user, sbClient) {
+    const pronoun = await GetPronouns(user, sbClient);
     if(pronoun === "") { return ""; }
     return ` ${pronoun}`;
 }
 
 BetterPronounsJS.GetPronounsPadStart = GetPronounsPadStart;
 
-async function GetPronounsPadEnd(user,) {
-    const pronoun = await GetPronouns(user);
+async function GetPronounsPadEnd(user, sbClient) {
+    const pronoun = await GetPronouns(user, sbClient);
     if(pronoun === "") { return ""; }
     return `${pronoun} `;
 }
