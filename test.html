@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <head>
     <script type="text/javascript" src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
-    <script type="text/javascript" src="./pronouns.js"></script>
+    <script type="text/javascript" src="https://desertice.github.io/BetterPronounsJS/pronouns.js"></script>
 </head>
 <body>
     <script  async>
+        BetterPronounsJS.GetPronouns("desertice").then(p => console.log(`Desertice's pronouns are ${p}`));
     </script>
 </body>
