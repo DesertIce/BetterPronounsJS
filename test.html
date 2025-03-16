@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <script type="text/javascript" src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
+    <script type="text/javascript" src="pronouns.js"></script>
+</head>
+<body>
+    <script async>
+        GetPronoun("desertice").then(console.info).then
+            GetPronounPadStart("desertice").then(p => console.info(`padStart: [${p}]`)).then
+                GetPronounPadEnd("desertice").then(p => console.info(`padEnd: [${p}]`)); 
+
+        GetPronoun("INVALID_USER").then(p => console.info(`Invalid user: [${p}]`)).then
+            GetPronounPadStart("INVALID_USER").then(p => console.info(`IU padStart: [${p}]`)).then
+                GetPronounPadEnd("INVALID_USER").then(p => console.info(`IU padEnd: [${p}]`));
+            
+    </script>
+</body>
