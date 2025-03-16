@@ -1,4 +1,5 @@
-const PronounIdMap = {
+const BetterPronounsJS = {};
+const PronounIdMap = Object.freeze({
     "aeaer": "Ae",
     "any": "Any",
     "eem": "E",
@@ -12,13 +13,8 @@ const PronounIdMap = {
     "vever": "Ve",
     "xexem": "Xe",
     "ziehir": "Zie",
-} ;
-
-const testSbClient = new StreamerbotClient();
-
-async function GetPronouns(user) {
-    return await GetPronouns(testSbClient, user);
-}
+});
+BetterPronounsJS.PronounIdMap = PronounIdMap
 
 async function GetPronouns(user, sbClient) {
     
@@ -31,6 +27,7 @@ async function GetPronouns(user, sbClient) {
         return `(${PronounIdMap[alejoPronouns.pronoun_id]}/${PronounIdMap[alejoPronouns.alt_pronoun_id]})`;
     }
 }
+BetterPronounsJS.GetPronouns = GetPronouns;
 
 async function GetPronounsPadStart(user) {
     const pronoun = await GetPronouns(user);
@@ -38,11 +35,15 @@ async function GetPronounsPadStart(user) {
     return ` ${pronoun}`;
 }
 
+BetterPronounsJS.GetPronounsPadStart = GetPronounsPadStart;
+
 async function GetPronounsPadEnd(user,) {
     const pronoun = await GetPronouns(user);
     if(pronoun === "") { return ""; }
     return `${pronoun} `;
 }
+
+BetterPronounsJS.GetPronounsPadEnd = GetPronounsPadEnd;
 
 async function _getPronounsJson(userId) {
     const json = await fetch(`https://api.pronouns.alejo.io/v1/users/${userId}`, {cache: "default"})
