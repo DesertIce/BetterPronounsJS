@@ -1,4 +1,5 @@
 const BetterPronounsJS = {};
+const PronounsCache = new Map();
 const PronounIdMap = Object.freeze({
     "aeaer": "Ae",
     "any": "Any",
@@ -14,6 +15,7 @@ const PronounIdMap = Object.freeze({
     "xexem": "Xe",
     "ziehir": "Zie",
 });
+
 BetterPronounsJS.PronounIdMap = PronounIdMap
 
 async function GetPronouns(user, sbClient) {
@@ -46,6 +48,10 @@ async function GetPronounsPadEnd(user,) {
 BetterPronounsJS.GetPronounsPadEnd = GetPronounsPadEnd;
 
 async function _getPronounsJson(userId) {
+    if(PronounsCache.has(userId)) {
+        console.debug(`Cache hit for ${userId}`);
+        return PronounsCache.get(userId);
+    }
     const json = await fetch(`https://api.pronouns.alejo.io/v1/users/${userId}`, {cache: "default"})
         .then(res => 
         {
@@ -58,6 +64,7 @@ async function _getPronounsJson(userId) {
         .catch(_ => "");
 
     if(json != null) {
+        PronounsCache.set(userId, json);
         return json;
     }
     else return undefined;
